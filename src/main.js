@@ -18,6 +18,15 @@ const store = createStore({
       state.counter = state.counter + payload.value;
     }
   },
+  actions: {
+    increment(context){
+      // Here we commit the mutation we want.
+      context.commit('increment');
+    },
+    increase(context, payload){
+      context.commit('increase', payload);
+    }
+  },
   getters: {
     finalCounter(state) {
       return state.counter * 2;

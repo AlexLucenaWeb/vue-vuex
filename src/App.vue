@@ -22,15 +22,21 @@ export default {
   },
   methods: {
     addTen() {
-      // this.$store.commit('increase', { value: 10 });
-      // New way to commit with and object:
-      this.$store.commit({
-        // the type is the name of the commit:
+      // // this.$store.commit('increase', { value: 10 });
+      // // New way to commit with and object:
+      // this.$store.commit({
+      //   // the type is the name of the commit:
+      //   type: 'increase',
+      //   value: 10
+      // })
+
+      // commit using Actions:
+      this.$store.dispatch({
         type: 'increase',
         value: 10
-      })
-    }
-  }
+      });
+    },
+  },
 };
 </script>
 
