@@ -6,27 +6,11 @@ import App from './App.vue';
 const store = createStore({
   state() {
     return {
-      counter: 0
+      counter: 0,
+      isLogged: false
     };
   },
-  mutations: {
-    increment(state) {
-      // state.counter++;ç
-      state.counter = state.counter + 2;
-    },
-    increase(state, payload) {
-      state.counter = state.counter + payload.value;
-    }
-  },
-  actions: {
-    increment(context){
-      // Here we commit the mutation we want.
-      context.commit('increment');
-    },
-    increase(context, payload){
-      context.commit('increase', payload);
-    }
-  },
+
   getters: {
     finalCounter(state) {
       return state.counter * 2;
@@ -40,8 +24,43 @@ const store = createStore({
         return 100;
       }
       return finalCounter;
+    },
+    isLogged(state){
+      return state.isLogged
     }
-  }
+  },
+
+  mutations: {
+    increment(state) {
+      // state.counter++;ç
+      state.counter = state.counter + 2;
+    },
+    increase(state, payload) {
+      state.counter = state.counter + payload.value;
+    },
+    logIn(state) {
+      state.isLogged = true
+    },
+    logOut(state) {
+      state.isLogged = false
+    }
+  },
+
+  actions: {
+    increment(context){
+      // Here we commit the mutation we want.
+      context.commit('increment');
+    },
+    increase(context, payload){
+      context.commit('increase', payload);
+    },
+    logIn(context){
+      context.commit('logIn')
+    },
+    logOut(context){
+      context.commit('logOut')
+    }
+  },
 });
 
 const app = createApp(App);
