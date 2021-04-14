@@ -4,7 +4,12 @@ import { createStore } from 'vuex';
 import App from './App.vue';
 
 // vuex Modules:
+// The state of a mudle is local 
 const conunterModule = {
+  namespaced: true,
+  // setting up the namespace to true, we need to acces the module resources by the name we give in the root store / name of resource.
+  // ['numbers/finalcounter'] 
+  // Using mapGetters we just past the name of the module as first argument.
   state() {
     return {
       counter: 0
@@ -29,6 +34,9 @@ const conunterModule = {
     }
   },
   getters: {
+    // testAuth(stat, getters, rootState, rootGetters){
+    //   return state.isLogged;
+    // },
     finalCounter(state) {
       return state.counter * 2;
     },
@@ -47,7 +55,7 @@ const conunterModule = {
 
 const store = createStore({
   modules: {
-    counter: conunterModule
+    numbers: conunterModule
   },
   state() {
     return {
