@@ -25,8 +25,8 @@ const store = createStore({
       }
       return finalCounter;
     },
-    isLogged(state){
-      return state.isLogged
+    isLogged(state) {
+      return state.isLogged;
     }
   },
 
@@ -38,29 +38,32 @@ const store = createStore({
     increase(state, payload) {
       state.counter = state.counter + payload.value;
     },
-    logIn(state) {
-      state.isLogged = true
-    },
-    logOut(state) {
-      state.isLogged = false
+    // logIn(state) {
+    //   state.isLogged = true
+    // },
+    // logOut(state) {
+    //   state.isLogged = false
+    // },
+    setAuth(state, payload) {
+      state.isLogged = payload.isAuth;
     }
   },
 
   actions: {
-    increment(context){
+    increment(context) {
       // Here we commit the mutation we want.
       context.commit('increment');
     },
-    increase(context, payload){
+    increase(context, payload) {
       context.commit('increase', payload);
     },
-    logIn(context){
-      context.commit('logIn')
+    logIn(context) {
+      context.commit('setAuth', { isAuth: true });
     },
-    logOut(context){
-      context.commit('logOut')
+    logOut(context) {
+      context.commit('setAuth', { isAuth: false });
     }
-  },
+  }
 });
 
 const app = createApp(App);
