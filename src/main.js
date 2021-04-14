@@ -3,14 +3,31 @@ import { createStore } from 'vuex';
 
 import App from './App.vue';
 
-const store = createStore({
+// vuex Modules:
+const conunterModule = {
   state() {
     return {
-      counter: 0,
-      isLogged: false
+      counter: 0
     };
   },
-
+  mutations: {
+    increment(state) {
+      // state.counter++;ç
+      state.counter = state.counter + 2;
+    },
+    increase(state, payload) {
+      state.counter = state.counter + payload.value;
+    }
+  },
+  actions: {
+    increment(context) {
+      // Here we commit the mutation we want.
+      context.commit('increment');
+    },
+    increase(context, payload) {
+      context.commit('increase', payload);
+    }
+  },
   getters: {
     finalCounter(state) {
       return state.counter * 2;
@@ -24,20 +41,27 @@ const store = createStore({
         return 100;
       }
       return finalCounter;
-    },
+    }
+  }
+};
+
+const store = createStore({
+  modules: {
+    counter: conunterModule
+  },
+  state() {
+    return {
+      isLogged: false
+    };
+  },
+
+  getters: {
     isLogged(state) {
       return state.isLogged;
     }
   },
 
   mutations: {
-    increment(state) {
-      // state.counter++;ç
-      state.counter = state.counter + 2;
-    },
-    increase(state, payload) {
-      state.counter = state.counter + payload.value;
-    },
     // logIn(state) {
     //   state.isLogged = true
     // },
@@ -50,13 +74,6 @@ const store = createStore({
   },
 
   actions: {
-    increment(context) {
-      // Here we commit the mutation we want.
-      context.commit('increment');
-    },
-    increase(context, payload) {
-      context.commit('increase', payload);
-    },
     logIn(context) {
       context.commit('setAuth', { isAuth: true });
     },
